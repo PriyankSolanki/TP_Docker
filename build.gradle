@@ -52,8 +52,9 @@ tasks.named('test') {
 sonarqube {
     properties {
         property "sonar.projectKey", "TP_Docker"
-        property "sonar.projectName", "TP Docker"
-        property "sonar.host.url", System.getenv("SONAR_HOST_URL")
+        property "sonar.projectName", "TP_Docker"
+        property "sonar.organization", "TP_Docker"
+        property "sonar.host.url", "https://sonarcloud.io"
         property "sonar.token", System.getenv("SONAR_TOKEN")
 
         property "sonar.coverage.jacoco.xmlReportPaths",
