@@ -51,9 +51,8 @@ tasks.named('test') {
 
 sonarqube {
     properties {
-        property "sonar.projectKey", "TP_Docker"
-        property "sonar.projectName", "TP_Docker"
-        property "sonar.organization", "TP_Docker"
+        property "sonar.projectKey", "PriyankSolanki_TP_Docker"
+        property "sonar.organization", "priyanksolanki"
         property "sonar.host.url", "https://sonarcloud.io"
         property "sonar.token", System.getenv("SONAR_TOKEN")
 
