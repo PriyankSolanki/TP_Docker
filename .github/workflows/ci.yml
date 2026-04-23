@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Give execute permission
+        run: chmod +x gradlew
+
+      - name: Build + Test + Coverage
+        run: ./gradlew clean test jacocoTestReport
+
+      # 📊 Codecov
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          files: build/reports/jacoco/test/jacocoTestReport.xml
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+      # 🔎 SonarQube
+      - name: SonarQube Scan
+        run: ./gradlew sonarqube
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
